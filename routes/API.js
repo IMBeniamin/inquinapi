@@ -103,6 +103,7 @@ router.get("/", (req, res) => {
       } else if (Object.keys(error).length > 0) {
         res.status(400).send(error);
       } else {
+        console.log("sending data to user", res);
         res.status(200).json(db_data);
       }
     });
