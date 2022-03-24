@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const Api = require("../model/apiScheme");
+const Api = require("../model/countryScheme");
 
 router.options("*", cors());
 
