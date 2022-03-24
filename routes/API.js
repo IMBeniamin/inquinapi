@@ -94,18 +94,18 @@ router.get("/", (req, res) => {
     formatted_query[key] === undefined ? delete formatted_query[key] : {}
   );
   console.log(formatted_query, filter);
-  console.log("la stringa di connessione e':", process.env.CONNECTION_STRING)
+//  console.log("la stringa di connessione e':", process.env.CONNECTION_STRING)
   filter.push("-_id");
   Api.find(formatted_query, filter, (query_error, db_data) => {
       console.log("received response from db")
       if (query_error) {
-        console.log("error 503 when sending")
+//        console.log("error 503 when sending")
         res.status(503).send(query_error);
       } else if (Object.keys(error).length > 0) {
-        console.log("error 400 when sending")
+//        console.log("error 400 when sending")
         res.status(400).send(error);
       } else {
-        console.log("sending data to user");
+//        console.log("sending data to user");
         res.status(200).json(db_data);
       }
     })

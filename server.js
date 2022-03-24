@@ -11,7 +11,7 @@ app.use('/api/',apiCall)
 app.use(cors())
 app.use(helmet())
 app.use(compression())
-mongoose.set('debug', true);
+//mongoose.set('debug', true);
 try {
     mongoose.connect(process.env.CONNECTION_STRING,() =>{
         console.log(`Connecting successfully with inquinator database`)
