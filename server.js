@@ -7,11 +7,11 @@ const helmet = require('helmet')
 const compression = require('compression')
 //require('dotenv/config');
 
-app.use('/api/v1/',apiCall)
+app.use('/api/',apiCall)
 app.use(cors())
 app.use(helmet())
 app.use(compression())
-
+mongoose.set('debug', true);
 try {
     mongoose.connect(process.env.CONNECTION_STRING,() =>{
         console.log(`Connecting successfully with inquinator database`)
@@ -20,7 +20,7 @@ try {
     console.log({message: error})
 }
 
-const port = 80 || process.env.PORT
+const port = process.env.PORT || 80
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
 })
