@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 app.use('/api/',apiCall)
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + '\\index.html')
+    res.sendFile(__dirname + '/index.html')
 })
 app.use(cors())
 app.use(helmet())

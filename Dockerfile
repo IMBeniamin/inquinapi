@@ -12,6 +12,6 @@ RUN git clone https://github.com/IMBeniamin/inquinapi.git ./
 # Run the package
 RUN npm ci --only=production
 COPY . .
-EXPOSE 44003
+EXPOSE 80
 ENV NODE_ENV production
 CMD ["npm", "start"]
