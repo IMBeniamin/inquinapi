@@ -96,7 +96,7 @@ router.get("/", (req, res) => {
   console.log(formatted_query, filter);
 //  console.log("la stringa di connessione e':", process.env.CONNECTION_STRING)
   filter.push("-_id");
-  Api.find(formatted_query, filter, (query_error, db_data) => {
+  Api.find(formatted_query, filter).sort().exec((query_error, db_data) => {
       console.log("received response from db")
       if (query_error) {
 //        console.log("error 503 when sending")
@@ -108,7 +108,7 @@ router.get("/", (req, res) => {
 //        console.log("sending data to user");
         res.status(200).json(db_data);
       }
-    })
+    });
 });
 
 module.exports = router;

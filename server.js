@@ -4,10 +4,14 @@ const mongoose = require("mongoose");
 const apiCall = require('./routes/API')
 const cors = require('cors')
 const helmet = require('helmet')
-const compression = require('compression')
-//require('dotenv/config');
-
+const compression = require('compression');
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv/config')
+}
 app.use('/api/',apiCall)
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + '\\index.html')
+})
 app.use(cors())
 app.use(helmet())
 app.use(compression())
