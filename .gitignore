@@ -17,6 +17,9 @@ build
 .env.production.local
 .env
 
+# docker-compose with credentials
+docker-compose.*
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

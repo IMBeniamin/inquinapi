@@ -5,7 +5,7 @@ const apiCall = require('./routes/API')
 const cors = require('cors')
 const helmet = require('helmet')
 const compression = require('compression')
-require('dotenv/config');
+//require('dotenv/config');
 
 app.use('/api/v1/',apiCall)
 app.use(cors())
