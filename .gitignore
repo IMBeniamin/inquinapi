@@ -17,6 +17,9 @@ build
 .env.production.local
 .env
 
+# run files
+*.sh
+
 # docker-compose with credentials
 docker-compose.*
 
