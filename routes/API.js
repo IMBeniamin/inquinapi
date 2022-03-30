@@ -106,6 +106,18 @@ router.get("/", (req, res) => {
         res.status(400).send(error);
       } else {
 //        console.log("sending data to user");
+        const equals = (a, b) => {
+         return a.length === b.length && a.every((v, i) => v === b[i])
+        }
+
+        filter.pop() // to delete -_id
+        if(filter.length)
+          db_data.forEach( (state,index) => {
+            //console.log(Object.values(state))
+            let dataKeys = Object.keys(Object.values(state)[Object.values(state).length - 1])
+            if(!equals(dataKeys,filter)) db_data.splice(index,1)
+          })
+
         res.status(200).json(db_data);
       }
     });
