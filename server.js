@@ -9,9 +9,11 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv/config')
 }
 app.use('/api/',apiCall)
+/*
 app.get("/", (req, res) => {
     res.redirect("https://www.derpi.it/inquinapi/docs")
 })
+ */
 app.use(cors())
 app.use(helmet())
 app.use(compression())

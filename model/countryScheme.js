@@ -63,7 +63,8 @@ const schema = mongoose.Schema({
     energy_per_gdp: Number,
     sea_level_rise_average: Number,
     sea_level_rise_cw2011: Number,
-    sea_level_rise_uhslcfd: Number
+    sea_level_rise_uhslcfd: Number,
+    net_forest_conversion: Number
 })
 
 module.exports = mongoose.model('inquinators',schema)
