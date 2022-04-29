@@ -64,10 +64,11 @@ const schema = mongoose.Schema({
     sea_level_rise_average: Number,
     sea_level_rise_cw2011: Number,
     sea_level_rise_uhslcfd: Number,
-    net_forest_conversion: Number
+    net_forest_conversion: Number,
+    municipal_water_withdrawal: Number,
 })
 
-module.exports = mongoose.model('inquinators',schema)
+module.exports = mongoose.model('inquinators', schema)
 
 
 

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3df536eb-350b-4dc7-8528-cbdf5a180219" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
+    <list default="true" id="3df536eb-350b-4dc7-8528-cbdf5a180219" name="Changes" comment="Added the strict parameter&#10;fixed input normalization&#10;imported lodash library for object merging&#10;refactored code">
+      <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/API.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/countryScheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/countryScheme.js" afterDir="false" />
     </list>
     <list id="53fea995-d7da-431b-bb9e-e4d1b36ac0dc" name="Changes by siorga" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +25,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -70,8 +71,17 @@
       <option name="presentableId" value="Default" />
       <updated>1651214630566</updated>
       <workItem from="1651214632020" duration="9477000" />
-      <workItem from="1651255284405" duration="8884000" />
+      <workItem from="1651255284405" duration="9240000" />
+      <workItem from="1651266513644" duration="95000" />
     </task>
+    <task id="LOCAL-00001" summary="Added the strict parameter&#10;fixed input normalization&#10;imported lodash library for object merging&#10;refactored code">
+      <created>1651265154513</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651265154513</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,5 +97,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added the strict parameter&#10;fixed input normalization&#10;imported lodash library for object merging&#10;refactored code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the strict parameter&#10;fixed input normalization&#10;imported lodash library for object merging&#10;refactored code" />
   </component>
 </project>
