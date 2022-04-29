@@ -1,0 +1,96 @@
+Index: routes/API.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const express = require(\"express\");\r\nconst router = express.Router();\r\nconst cors = require(\"cors\");\r\nconst Api = require(\"../model/countryScheme\");\r\n\r\nrouter.options(\"*\", cors());\r\n\r\nrouter.get(\"/\", (req, res) => {\r\n    let error = {};\r\n\r\n    const iso_code = parse_isoCode(req.query.iso_code, error);\r\n    const year = parse_year(req.query.year, error);\r\n    const filter = parse_filter(req.query.filter, error);\r\n    const strict = parse_strict(req.query.strict, error);\r\n\r\n    // Initiating query build\r\n    const formatted_query = {\r\n            iso_code: iso_code,\r\n            year: year\r\n    };\r\n    for (const [key, value] of Object.entries(formatted_query))\r\n        value === undefined ? delete formatted_query[key] : {}\r\n\r\n    Api.find(formatted_query).select(filter).exec((query_error, db_data) => {\r\n        if (query_error)\r\n            res.status(503).send(query_error)\r\n        else if (Object.keys(error).length > 0)\r\n            res.status(400).send(error);\r\n        else\r\n            res.status(200).json(db_data);\r\n    });\r\n});\r\n\r\nmodule.exports = router;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/routes/API.js b/routes/API.js
+--- a/routes/API.js	(revision 82f3178a28b87f12986dd7d51788f049930a23e4)
++++ b/routes/API.js	(date 1651225372007)
+@@ -5,6 +5,77 @@
+ 
+ router.options("*", cors());
+ 
++const parse_isoCode = (raw_isoCode, error) => {
++    const iso_code_format = new RegExp("^\\w{3}(?:,\\w{3})*$");
++    if (raw_isoCode === undefined || !raw_isoCode)
++        return undefined
++
++    // remove spaces and formats according to model then test against regex pattern
++    else if (iso_code_format.test(raw_isoCode.replace(/\s/g, "").toUpperCase()))
++        return { $in: raw_isoCode.split(",") }
++
++    else
++    {
++        error["iso_code"] = {
++            message: "iso_code does not respect the {AAA,AAA,...} format",
++        };
++        return undefined
++    }
++}
++
++const parse_year = (raw_year, error) => {
++    const year_format_list = new RegExp("^-?\\d+(?:,-?\\d+)*$");
++    const year_format_range = new RegExp("^(-?\\d+)-(-?\\d+)$");
++
++    if (raw_year === undefined || !raw_year)
++        return undefined;
++
++    else if (year_format_list.test(raw_year))
++        return { $in: raw_year.split(",") };
++
++    else if (year_format_range.test(raw_year))
++    {
++        const range = year_format_range.exec(raw_year).slice(1);
++        return { $gt: Math.min(...range), $lt: Math.max(...range) }
++    }
++
++    else
++    {
++        error["year"] = {
++            message:
++                "year does not respect the {YYYY,YYYY,...} or {YYYY-YYYY} format",
++        };
++        return undefined
++    }
++}
++
++const parse_filter = (raw_filter, error) => {
++    // checks filter formatting {[-]field1,[-]field2,...}
++    const filter_format = new RegExp("^(-?)\\w+(?:(,?)\\1\\w+)*$");
++    const default_filter = ['-_id']
++    let filter = raw_filter
++        ? raw_filter.replace(/\s/g, "")
++        : undefined;
++
++    if (filter === undefined || !filter)
++        return default_filter;
++
++    else if (filter_format.test(filter))
++        return ['-_id'].concat(filter.split(","))
++
++    else
++    {
++        error["filter"] = {
++            message: "filter does not respect the {[-]field1,[-]field2,...} format",
++        };
++        return default_filter
++    }
++}
++
++const parse_strict = (raw_strict, error) => {
++    return false
++}
++
+ router.get("/", (req, res) => {
+     let error = {};
+ 
+@@ -29,6 +100,7 @@
+         else
+             res.status(200).json(db_data);
+     });
++
+ });
+ 
+ module.exports = router;
