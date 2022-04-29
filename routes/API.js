@@ -2,69 +2,66 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const Api = require("../model/countryScheme");
+const _ = require("lodash");
 
 router.options("*", cors());
 
-const parse_isoCode = (raw_isoCode, error) => {
+const parse_isoCode = (raw, error) => {
     const iso_code_format = new RegExp("^\\w{3}(?:,\\w{3})*$");
-    if (raw_isoCode === undefined || !raw_isoCode)
-        return undefined
+    if (raw === undefined || !raw) return {}
 
+    const iso_code = raw.replace(/\s/g, "").toUpperCase();
     // remove spaces and formats according to model then test against regex pattern
-    else if (iso_code_format.test(raw_isoCode.replace(/\s/g, "").toUpperCase()))
-        return { $in: raw_isoCode.split(",") }
+    if (iso_code_format.test(iso_code))
+        return {iso_code: {$in: iso_code.split(",")}};
 
-    else
-    {
+    else {
         error["iso_code"] = {
-            message: "iso_code does not respect the {AAA,AAA,...} format",
+            message: "iso_code does not respect the AAA[,AAA,...] format",
         };
-        return undefined
+        return {}
     }
 }
 
-const parse_year = (raw_year, error) => {
+const parse_year = (raw, error) => {
+    // regex that checks the year formatting
+    // YYYY[,YYYY,YYYY,...]
     const year_format_list = new RegExp("^-?\\d+(?:,-?\\d+)*$");
+    // YYYY-YYYY
     const year_format_range = new RegExp("^(-?\\d+)-(-?\\d+)$");
 
-    if (raw_year === undefined || !raw_year)
-        return undefined;
+    if (raw === undefined || !raw) return {};
 
-    else if (year_format_list.test(raw_year))
-        return { $in: raw_year.split(",") };
+    const year = raw.replace(/\s/g, "");
+    if (year_format_list.test(year))
+        return {year: {$in: year.split(",")}};
 
-    else if (year_format_range.test(raw_year))
-    {
-        const range = year_format_range.exec(raw_year).slice(1);
-        return { $gt: Math.min(...range), $lt: Math.max(...range) }
-    }
-
-    else
-    {
+    else if (year_format_range.test(year)) {
+        const range = year_format_range.exec(year).slice(1);
+        return {
+            year: {$gte: Math.min(...range), $lte: Math.max(...range)}
+        }
+    } else {
         error["year"] = {
             message:
-                "year does not respect the {YYYY,YYYY,...} or {YYYY-YYYY} format",
+                "year does not respect the YYYY[,YYYY,...] or YYYY-YYYY format",
         };
-        return undefined
+        return {}
     }
 }
 
-const parse_filter = (raw_filter, error) => {
-    // checks filter formatting {[-]field1,[-]field2,...}
+const parse_filter = (raw, error) => {
+    // checks filter formatting [-]field1[,[-]field2,...]
     const filter_format = new RegExp("^(-?)\\w+(?:(,?)\\1\\w+)*$");
     const default_filter = ['-_id']
-    let filter = raw_filter
-        ? raw_filter.replace(/\s/g, "")
-        : undefined;
 
-    if (filter === undefined || !filter)
-        return default_filter;
+    if (raw === undefined || !raw) return default_filter;
 
-    else if (filter_format.test(filter))
+    const filter = raw.replace(/\s/g, "");
+    if (filter_format.test(filter))
         return ['-_id'].concat(filter.split(","))
 
-    else
-    {
+    else {
         error["filter"] = {
             message: "filter does not respect the {[-]field1,[-]field2,...} format",
         };
@@ -72,8 +69,26 @@ const parse_filter = (raw_filter, error) => {
     }
 }
 
-const parse_strict = (raw_strict, error) => {
-    return false
+const parse_strict = (raw, error, filter_fields) => {
+    // checks filter formatting
+    // field1[,field2,...]
+    const strict_format_list = new RegExp("^\\w+(,\\w+)*$");
+    // (*) All fields must be strict
+    const strict_format_all = new RegExp("^\\*$");
+
+    if (raw === undefined || !raw) return {};
+
+    const strict = raw.replace(/\s/g, "")
+    if (strict_format_list.test(strict))
+        return strict.split(",").reduce((prev, cur) => ({...prev, [cur]: {$exists: true}}), {})
+    else if (strict_format_all.test(strict))
+        return filter_fields.reduce((prev, cur) => ({...prev, [cur]: {$exists: true}}), {})
+    else {
+        error["strict"] = {
+            message: "strict does not respect the field1[,field2,...] or * format",
+        };
+        return {};
+    }
 }
 
 router.get("/", (req, res) => {
@@ -81,18 +96,13 @@ router.get("/", (req, res) => {
 
     const iso_code = parse_isoCode(req.query.iso_code, error);
     const year = parse_year(req.query.year, error);
+
     const filter = parse_filter(req.query.filter, error);
-    const strict = parse_strict(req.query.strict, error);
+    const strict = parse_strict(req.query.strict, error, filter);
 
-    // Initiating query build
-    const formatted_query = {
-            iso_code: iso_code,
-            year: year
-    };
-    for (const [key, value] of Object.entries(formatted_query))
-        value === undefined ? delete formatted_query[key] : {}
-
-    Api.find(formatted_query).select(filter).exec((query_error, db_data) => {
+    const query = _.merge(iso_code, year, strict);
+    console.log(query)
+    Api.find(query).select(filter).exec((query_error, db_data) => {
         if (query_error)
             res.status(503).send(query_error)
         else if (Object.keys(error).length > 0)

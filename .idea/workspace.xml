@@ -2,31 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3df536eb-350b-4dc7-8528-cbdf5a180219" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/model/countryScheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/countryScheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/API.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
-    <list id="53fea995-d7da-431b-bb9e-e4d1b36ac0dc" name="Changes by siorga" comment="">
-      <change beforePath="$PROJECT_DIR$/routes/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/API.js" afterDir="false" />
-    </list>
+    <list id="53fea995-d7da-431b-bb9e-e4d1b36ac0dc" name="Changes by siorga" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/routes/API.js">
-      <ranges>
-        <range start1="6" end1="6" start2="6" end2="77" changelist="53fea995-d7da-431b-bb9e-e4d1b36ac0dc" />
-        <range start1="8" end1="12" start2="79" end2="80" changelist="3df536eb-350b-4dc7-8528-cbdf5a180219" />
-        <range start1="13" end1="73" start2="81" end2="85" changelist="3df536eb-350b-4dc7-8528-cbdf5a180219" />
-        <range start1="74" end1="122" start2="86" end2="101" changelist="3df536eb-350b-4dc7-8528-cbdf5a180219" />
-        <range start1="123" end1="123" start2="102" end2="103" changelist="53fea995-d7da-431b-bb9e-e4d1b36ac0dc" />
-      </ranges>
-    </file>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -36,17 +36,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "last_opened_file_path": "C:/Users/sACCARDO/Desktop/inquinapi",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="actions.on.save" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="debug" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="debug" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs>
+        <env name="CONNECTION_STRING" value="mongodb+srv://saccardo:mJt0zCfBrBtLd2Px@derpi0.izxua.mongodb.net/TDP?retryWrites=true&amp;w=majority" />
+      </envs>
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,10 +70,22 @@
       <option name="presentableId" value="Default" />
       <updated>1651214630566</updated>
       <workItem from="1651214632020" duration="9477000" />
+      <workItem from="1651255284405" duration="8884000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
