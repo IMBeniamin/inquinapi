@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3df536eb-350b-4dc7-8528-cbdf5a180219" name="Changes" comment="Added the strict parameter&#10;fixed input normalization&#10;imported lodash library for object merging&#10;refactored code">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/countryScheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/countryScheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/API.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <list id="53fea995-d7da-431b-bb9e-e4d1b36ac0dc" name="Changes by siorga" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +76,7 @@
       <workItem from="1651214632020" duration="9477000" />
       <workItem from="1651255284405" duration="9240000" />
       <workItem from="1651266513644" duration="95000" />
+      <workItem from="1652640927041" duration="4995000" />
     </task>
     <task id="LOCAL-00001" summary="Added the strict parameter&#10;fixed input normalization&#10;imported lodash library for object merging&#10;refactored code">
       <created>1651265154513</created>

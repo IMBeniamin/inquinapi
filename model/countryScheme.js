@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+//values rhat can be queried
 const schema = mongoose.Schema({
     iso_code: String,
     country: String,

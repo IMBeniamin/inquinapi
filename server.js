@@ -8,18 +8,19 @@ const compression = require('compression');
 if (process.env.NODE_ENV !== "production") {
     require('dotenv/config')
 }
-app.use('/api/',apiCall)
-/*
-app.get("/", (req, res) => {
-    res.redirect("https://www.derpi.it/inquinapi/docs")
-})
- */
+app.use('/api/', apiCall)
 app.use(cors())
 app.use(helmet())
 app.use(compression())
 //mongoose.set('debug', true);
+
+app.get("/", (req, res) => {
+    res.redirect("https://www.derpi.it/inquinapi/docs")
+})
+
+
 try {
-    mongoose.connect(process.env.CONNECTION_STRING,() =>{
+    mongoose.connect(process.env.CONNECTION_STRING, () => {
         console.log(`Connecting successfully with inquinator database`)
     })
 } catch (error) {

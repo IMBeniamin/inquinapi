@@ -6,8 +6,10 @@ const _ = require("lodash");
 
 router.options("*", cors());
 
+//prasing raw iso_code to iso_code acceptable to mongoose syntax
 const parse_isoCode = (raw, error) => {
-    const iso_code_format = new RegExp("^\\w{3}(?:,\\w{3})*$");
+    //regex that checks iso_code format
+    const iso_code_format = new RegExp("^\\w{3}(?:,\\w{3})*$"); //ITA,DEU,FRA...
     if (raw === undefined || !raw) return {}
 
     const iso_code = raw.replace(/\s/g, "").toUpperCase();
@@ -23,6 +25,7 @@ const parse_isoCode = (raw, error) => {
     }
 }
 
+//parsing raw year to year acceptable to mongoose syntax
 const parse_year = (raw, error) => {
     // regex that checks the year formatting
     // YYYY[,YYYY,YYYY,...]
@@ -33,13 +36,14 @@ const parse_year = (raw, error) => {
     if (raw === undefined || !raw) return {};
 
     const year = raw.replace(/\s/g, "");
+    // remove spaces and formats according to model then test against regex pattern
     if (year_format_list.test(year))
         return {year: {$in: year.split(",")}};
 
     else if (year_format_range.test(year)) {
         const range = year_format_range.exec(year).slice(1);
         return {
-            year: {$gte: Math.min(...range), $lte: Math.max(...range)}
+            year: {$gte: Math.min(...range), $lte: Math.max(...range)} //$gte = >= || $lte = <=
         }
     } else {
         error["year"] = {
@@ -50,6 +54,7 @@ const parse_year = (raw, error) => {
     }
 }
 
+//parsing raw filter to filter acceptable to mongoose syntax
 const parse_filter = (raw, error) => {
     // checks filter formatting [-]field1[,[-]field2,...]
     const filter_format = new RegExp("^(-?)\\w+(?:(,?)\\1\\w+)*$");
@@ -58,6 +63,7 @@ const parse_filter = (raw, error) => {
     if (raw === undefined || !raw) return default_filter;
 
     const filter = raw.replace(/\s/g, "");
+    // remove spaces and formats according to model then test against regex pattern
     if (filter_format.test(filter))
         return ['-_id'].concat(filter.split(","))
 
@@ -79,6 +85,7 @@ const parse_strict = (raw, error, filter_fields) => {
     if (raw === undefined || !raw) return {};
 
     const strict = raw.replace(/\s/g, "")
+    // remove spaces and formats according to model then test against regex pattern
     if (strict_format_list.test(strict))
         return strict.split(",").reduce((prev, cur) => ({...prev, [cur]: {$exists: true}}), {})
     else if (strict_format_all.test(strict))
@@ -98,9 +105,9 @@ router.get("/", (req, res) => {
     const year = parse_year(req.query.year, error);
 
     const filter = parse_filter(req.query.filter, error);
-    const strict = parse_strict(req.query.strict, error, filter);
+    const strict = parse_strict(req.query.strict, error, filter); //parameter used to return documents that have available fields present in filter
 
-    const query = _.merge(iso_code, year, strict);
+    const query = _.merge(iso_code, year, strict); //merge 3 object into 1 object
     console.log(query)
     Api.find(query).select(filter).exec((query_error, db_data) => {
         if (query_error)
