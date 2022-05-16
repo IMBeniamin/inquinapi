@@ -30,7 +30,6 @@ To run the API, type ``npm run debug`` and press enter. Now you can send HTTP re
 
 | Middleware | Link                              | Description                                       |
 |------------|-----------------------------------|---------------------------------------------------|
-| Express    | https://expressjs.com/            | Web application framework                         |
 | Nodemon    | https://nodemon.io/               | Restart automatically your server                 |
 | Helmet     | https://helmetjs.github.io/       | Make secure your server                           |
 | Cors       | https://github.com/expressjs/cors | Enable cors on your server                        |
