@@ -5,7 +5,7 @@ from 1860 to 2020 The data are stored in a database in MongoDB. The connection s
 isn't included. This web service is built following the RESTful API principles architecture. The API is used to send
 data to [pollutinator](https://github.com/IMBeniamin/pollutinator). This API is hosted on docker. You can use this web
 service through this link: https://inquinapi.derpi.it/api/. If you want to read the documentation about the API, click
-this [link]("https://www.derpi.it/inquinapi/docs")
+this [link]("siorga.alwaysdata.net/inquinapi")
 
 ## Getting started
 
